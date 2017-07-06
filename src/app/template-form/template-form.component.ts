@@ -9,27 +9,30 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./template-form.component.css']
 })
 export class TemplateFormComponent implements OnInit {
-
   usuario: any = {
     nome: null,
     email: null
   };
 
-  onSubmit(form) {
-    console.log(form);
+  onSubmit(formulario) {
+    console.log(formulario);
     // console.log(this.usuario);
 
-  // endereco rest test para testar envio
-    this.http.post('https://httpbin.org/post', JSON.stringify(form.value)).map(res => res)
-    .subscribe(dados => console.log(dados));
+    // endereco rest test para testar envio
+    this.http
+      .post('https://httpbin.org/post', JSON.stringify(formulario.value))
+      .map(res => res)
+      .subscribe(dados => {
+        console.log(dados);
+
+        // resetar form
+        formulario.form.reset();
+      });
   }
 
-  constructor(
-    private http: Http
-  ) { }
+  constructor(private http: Http) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   verificaValidTouched(campo) {
     return !campo.valid && campo.touched;
@@ -42,23 +45,23 @@ export class TemplateFormComponent implements OnInit {
     };
   }
 
-  consultaCEP(cep, form) {
+  consultaCEP(cep, formulario) {
     // Nova variável "cep" somente com dígitos.
     cep = cep.replace(/\D/g, '');
 
     // Verifica se campo cep possui valor informado.
     if (cep !== '') {
-
       // Expressão regular para validar o CEP.
       const validacep = /^[0-9]{8}$/;
 
       // Valida o formato do CEP.
       if (validacep.test(cep)) {
+        this.resetaDadosForm(formulario);
 
-        this.resetaDadosForm(form);
-
-        this.http.get(`//viacep.com.br/ws/${cep}/json`).map(dados => dados.json())
-          .subscribe(dados => this.popularDadosForm(dados, form));
+        this.http
+          .get(`//viacep.com.br/ws/${cep}/json`)
+          .map(dados => dados.json())
+          .subscribe(dados => this.popularDadosForm(dados, formulario));
       }
     }
   }
@@ -88,7 +91,6 @@ export class TemplateFormComponent implements OnInit {
         estado: dados.uf
       }
     });
-
   }
 
   resetaDadosForm(formulario) {
@@ -103,5 +105,4 @@ export class TemplateFormComponent implements OnInit {
       }
     });
   }
-
 }

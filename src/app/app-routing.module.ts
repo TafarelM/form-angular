@@ -7,7 +7,7 @@ import { TemplateFormComponent } from './template-form/template-form.component';
 const routes: Routes = [
   {
     path: 'templateForm',
-    component: TemplateFormComponent,
+    component: TemplateFormComponent
   },
   {
     path: 'dataForm',
@@ -24,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
