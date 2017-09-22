@@ -137,9 +137,7 @@ export class DataFormComponent implements OnInit {
         cidade: dados.localidade,
         estado: dados.uf
       }
-    });
-
-    this.formulario.get('nome').setValue('Loiane');
+    });    
 
     // console.log(form);
   }
