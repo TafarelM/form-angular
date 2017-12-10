@@ -1,6 +1,3 @@
-import { ConsultarCepService } from './../shared/services/consultar-cep.service';
-import { EstadoBr } from './../shared/models/estado-br.model';
-import { DropdownService } from './../shared/services/dropdown.service';
 import { Http } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -9,6 +6,11 @@ import {
   FormBuilder,
   Validators
 } from '@angular/forms';
+
+import { EstadoBr } from './../shared/models/estado-br.model';
+
+import { DropdownService } from './../shared/services/dropdown.service';
+import { ConsultarCepService } from './../shared/services/consultar-cep.service';
 
 @Component({
   selector: 'app-data-form',
@@ -19,6 +21,8 @@ export class DataFormComponent implements OnInit {
   formulario: FormGroup;
   estados: EstadoBr[];
 
+  public showCollapse = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private http: Http,
@@ -27,18 +31,22 @@ export class DataFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    /*
     this.dropdownService.getEstadosBr().subscribe(dados => {
       this.estados = dados;
       console.log(dados);
     });
+    */
 
-    /*this.formulario = new FormGroup({
+    /*
+    this.formulario = new FormGroup({
       nome: new FormControl(null),
       email: new FormControl(null),
       endereco: new FormGroup({
         cep: new FormControl(null)
       })
-    });*/
+    });
+    */
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
@@ -137,12 +145,12 @@ export class DataFormComponent implements OnInit {
         cidade: dados.localidade,
         estado: dados.uf
       }
-    });    
+    });
 
     // console.log(form);
   }
 
-  resetaDadosForm(formulario) {
+  public resetaDadosForm(formulario): void {
     formulario.patchValue({
       endereco: {
         rua: null,
@@ -152,5 +160,10 @@ export class DataFormComponent implements OnInit {
         estado: null
       }
     });
+  }
+
+  public collapse(): void {
+    this.showCollapse = !this.showCollapse;
+    console.log(this.showCollapse);
   }
 }

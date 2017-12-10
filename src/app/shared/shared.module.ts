@@ -1,36 +1,48 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { CampoControlErroComponent } from './components/campo-control-erro/campo-control-erro.component';
+import { FormDebugComponent } from './components/form-debug/form-debug.component';
+import { InputComponent } from './components/input/input.component';
 
 import { ConsultarCepService } from './services/consultar-cep.service';
 import { DropdownService } from './services/dropdown.service';
-
-import { CampoControlErroComponent } from './campo-control-erro/campo-control-erro.component';
-import { FormDebugComponent } from './form-debug/form-debug.component';
+import { CepService } from './services/cep.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   declarations: [
     FormDebugComponent,
     CampoControlErroComponent,
+    InputComponent,
   ],
   exports: [
+    FormDebugComponent,
+    CampoControlErroComponent,
+    InputComponent,
     CommonModule,
-    HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    FormDebugComponent,
-    CampoControlErroComponent
+    HttpModule
   ],
-  providers: [
-    DropdownService,
-    ConsultarCepService,
-]
+  providers: []
 })
-export class SharedModule { }
+export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        DropdownService,
+        ConsultarCepService,
+        CepService
+      ]
+    };
+  }
+ }

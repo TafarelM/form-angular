@@ -1,0 +1,99 @@
+<div class="form-content">
+
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()" novalidate>
+
+    <!-- nome -->
+    <div class="form-row">
+      <app-input-content class="col-md-12" errorMessage="Campo obrigatório e com 5 caracteres" label="Nome">
+
+        <input class="form-control" formControlName="nome" placeholder="Nome completo" autocomplete="off">
+
+      </app-input-content>
+    </div>
+
+    <!-- email -->
+    <div class="form-row">
+      <app-input-content class="col-md-12" errorMessage="E-mail inválido" label="E-mail">
+
+        <input type="text" class="form-control" formControlName="email" placeholder="E-mail" autocomplete="off">
+
+      </app-input-content>
+    </div>
+
+    <!-- row -->
+    <div class="form-row">
+      <!-- cep -->
+      <app-input-content class="col-md-3" errorMessage="CEP inválido" label="CEP">
+
+        <input type="text" class="form-control" formControlName="cep" placeholder="CEP" autocomplete="off" (blur)="consultaCEP()">
+
+      </app-input-content>
+
+      <!-- rua -->
+      <app-input-content class="col-md-6" errorMessage="Rua inválido" label="Rua">
+
+        <input type="text" class="form-control" formControlName="rua" placeholder="Rua" autocomplete="off">
+
+      </app-input-content>
+
+      <!-- numero -->
+      <app-input-content class="col-md-3" errorMessage="Número inválido" label="Número">
+
+        <input type="text" class="form-control" formControlName="numero" placeholder="Número" autocomplete="off">
+
+      </app-input-content>
+
+    </div>
+    <!-- row end -->
+
+    <!-- complemento -->
+    <div class="form-row">
+      <app-input-content class="col-md-12" errorMessage="Complemento inválido" label="Complemento">
+
+        <input type="text" class="form-control" formControlName="complemento" placeholder="Complemento" autocomplete="off">
+
+      </app-input-content>
+    </div>
+
+    <!-- row -->
+    <div class="form-row">
+
+      <!-- Bairro -->
+      <app-input-content class="col-md-5" errorMessage="Bairro inválido" label="Bairro">
+
+        <input type="text" class="form-control" formControlName="bairro" placeholder="Bairro" autocomplete="off">
+
+      </app-input-content>
+
+      <!-- Cidade -->
+      <app-input-content class="col-md-4" errorMessage="Cidade inválido" label="Cidade">
+
+        <input type="text" class="form-control" formControlName="cidade" placeholder="Cidade" autocomplete="off" readonly>
+
+      </app-input-content>
+
+      <!-- Estado -->
+      <app-input-content class="col-md-3" errorMessage="Estado inválido" label="Estado">
+
+        <input type="text" class="form-control" formControlName="estado" placeholder="Estado" autocomplete="off" readonly>
+
+      </app-input-content>
+
+    </div>
+    <!-- row ends -->
+
+    <div class="form-group">
+      <button class="btn btn-outline-primary" [disabled]="formulario.invalid" type="submit">Submit</button>
+    </div>
+
+    <button class="btn btn-primary" type="button" (click)="collapse()">
+      Show debug form
+    </button>
+
+    <div *ngIf="showCollapse">
+      <app-form-debug [form]="formulario"></app-form-debug>
+    </div>
+
+  </form>
+
+</div>

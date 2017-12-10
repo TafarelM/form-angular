@@ -9,6 +9,8 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./template-form.component.css']
 })
 export class TemplateFormComponent implements OnInit {
+  public showCollapse = false;
+
   usuario: any = {
     nome: null,
     email: null
@@ -104,5 +106,9 @@ export class TemplateFormComponent implements OnInit {
         estado: null
       }
     });
+  }
+
+  public collapse(): void {
+    this.showCollapse = !this.showCollapse;
   }
 }

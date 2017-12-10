@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 export class ConsultarCepService {
   constructor(private http: Http) {}
 
-  consultaCEP(cep, resetaFormCallback, formulario) {
+  public consultaCEP(cep, resetaFormCallback, formulario) {
     // Nova variável "cep" somente com dígitos.
     cep = cep.replace(/\D/g, '');
 
@@ -24,4 +24,5 @@ export class ConsultarCepService {
       }
     }
   }
+
 }
